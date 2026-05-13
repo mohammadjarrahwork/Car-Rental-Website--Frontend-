@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JARRAH Rental - Cars</title>
+  <link rel="stylesheet" href="car.css">
+</head>
+<body>
+  <header>
+    <h1>JARRAH Rental</h1>
+    <nav>
+      <ul>
+        <li><a href ="home 1.html">Home</a></li>
+        <li><a href="car 2.html">Cars</a></li>
+        <li><a href="aboutpage 3.html">About</a></li>
+        <li><a href="contact 4.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+    <h2>Our Collection:</h2>
+    <div class="search-controls">
+      <input type="text" id="searchInput" placeholder="Search By Brand Or Model">
+      <select id="filterBrand">
+        <option value="all">All brands</option>
+        <option value="Audi">Audi</option>
+        <option value="BMW">BMW</option>
+        <option value="Cadillac CT5-V Blackwing">Cadillac CT5-V Blackwing</option>
+        <option value="Ferrari">Ferrari</option>
+        <option value="Honda CRV">Honda CRV</option>
+        <option value="Kia">Kia</option>
+        <option value="Lamborghini">Lamborghini</option>
+        <option value="Mercedes-Benz">Mercedes</option>
+        <option value="Mini Cooper">Mini Cooper</option>
+        <option value="Nissan">Nissan</option>
+        <option value="Porsche Panamera">Porsche Panamera</option>
+        <option value="Rolls Royce">Rolls Royce</option>
+        <option value="Tesla Model Y">Tesla Model Y</option>
+        <option value="Toyota">Toyota</option>
+        <option value="Volkswagen">Volkswagen</option>
+        <!---<option value="Mercedes-Benz">Mercedes</option>
+        <option value="BMW">BMW</option>
+        <option value="Kia">Kia</option>
+        <option value="Toyota">Toyota</option>
+        <option value="Nissan">Nissan</option>-->
+        <!----<option value="Volkswagen">Volkswagen</option>
+        <option value="Ferrari">Ferrari</option>
+        <option value="Mini Cooper">Mini Cooper</option>
+        <option value="Cadillac CT5-V Blackwing">Cadillac CT5-V Blackwing</option>
+        <option value="Porsche Panamera">Porsche Panamera</option>
+        <option value="Tesla Model Y">Tesla Model Y</option>
+        <option value="Honda CRV">Honda CRV</option>
+        <option value="Rolls Royce">Rolls Royce</option>
+        <option value="Lamborghini">Lamborghini</option>-->
+      </select>
+      <select id="filterCategory">
+        <option value="all">All categories</option>
+        <option value="Hatchback">Hatchback</option>
+        <option value="Performance Sedan">Performance Sedan</option>
+        <option value="Sedan">Sedan</option>
+        <option value="SUV Crossover">SUV Crossover</option>
+        <option value="SUV">SUV</option>
+        <option value="Super Cars">Super Cars</option>
+      </select>
+      <button type="button" id="filterButton">Filter</button>
+    </div>
+    <div class="cars-grid">
+      <div class="car-card" data-brand="Mercedes-Benz" data-category="Performance Sedan">
+        <img src="Images/Mercedes-Benz-E63_AMG-2017-Front.8b39fdf0.jpg" alt="Mercedes Benz ">
+        <p>Brand: Mercedes-Benz</p> 
+        <p>Model:E-class 63 (2017)</p>
+        <p class="category">Category: Performance Sedan</p>
+        <P>Price : 100$/day</P>
+        <p>Engine options: 4.0-liter V8 Biturbo </p>
+        <p>Power: 612 HorsePower</p>
+        <p>Performance tech:
+        4MATIC+ AWD system (fully variable torque distribution)
+        Drift Mode (rear-wheel drive only for drifting)
+         Adaptive air suspension (AMG Ride Control)
+         High-performance braking system (optional carbon ceramic)</p>
+         <p></p>
+        <a class="btn" href="#" onclick="selectcar('Mercedes-Benz E63', 100); return false;">Book Now</a>
+      </div>
+      <div class="car-card" data-brand="BMW" data-category="Performance Sedan">
+        <img src="Images/large_23a18def-f064-483a-ab04-d9f177d92abc.webp" alt="BMW">
+        <P>Brand: BMW</P>
+        <p>Model: BMW M5 (2017)</p>
+        <p class="category">Category: Performance Sedan</p>
+        <p>Price: 200$/day</p>
+        <p>Engine: 4.4L V8 twin-turbo</p>
+        <P>Power: 600 HorsePower</P>
+        <p>Performance Tech
+          Adaptive suspension (very advanced)
+          Launch control
+          Active M differential (better traction)
+          F90 adds:
+          AWD → better grip
+          Switchable RWD mode (for drifting)
+        </p>
+        <a class="btn" href="#" onclick="selectcar('BMW M5', 200); return false;">Book Now</a>
+      </div>
+      <div class ="car-card" data-brand="Kia" data-category="Hatchback">
+        <img src="Images/1 Kia Picanto review 20205 UK.jpg"alt="Kia Picanto">
+        <p>Brand: Kia </p>
+        <P>Model Kia picanto (2026)</P>
+        <p class="category">Category: Hatchback</p>
+        <p>Price: 20$/day</p>
+        <p>Engine:
+        1.0L 3-cylinder petrol (very fuel-efficient)
+        <P>1.2L 4-cylinder petrol (more power)
+        Manual or automatic transmission</P>
+        <a class="btn" href="#" onclick="selectcar('Kia Picanto', 20);return false;">Book Now</a>
+      </div>
+      <div class = "car-card" data-brand="Toyota" data-category="Sedan">
+        <img src="Images/2014_Toyota_Corolla_Test_Drive_Review_summaryImage.jpeg" alt="Toyota Corolla">
+        <p>Brand: Toyota</p>
+        <p>Model: Toyota Corolla S (2014)</p>
+        <p class="category">Category: Sedan</p>
+        <P>Price: 30$/day</P>
+        <P>Engine:
+         1.8L 4-cylinder
+        Power: 132 hp
+        Torque: 128 lb-ft
+        Drive: Front-wheel drive
+        Transmission:
+            CVT automatic
+            or 6-speed manual
+        </P>
+         <a class="btn" href="#" onclick="selectcar('Toyota Corolla', 30);return false;">Book Now</a>
+      </div>
+      <div class = "car-card" data-brand="Nissan" data-category="Hatchback">
+        <img src="Images/nissan-micra-front-driving-three-quarters.jpg" alt="Nissan Micra">
+        <P>Brand : Nissan</P>
+        <p>Model: Nissan Micra (2013)</p>
+        <p class="category">Category: Hatchback</p>
+        <p>Price: 5$/day</p>
+        <P>Engine: 1.2L 3-cylinder petrol
+            80 hp (basic version)</P>
+            <P>1.2L supercharged (DIG-S)
+            ~ 98 hp (more powerful)</P>
+            <a class="btn" href="#" onclick="selectcar('Nissan Micra', 5);return false;">Book Now</a>
+      </div>
+      <div class = "car-card" data-brand="Toyota" data-category="SUV Crossover">
+        <img src ="Images/2025-Toyota-RAV4-Hybrid-XSE-Exterior.webp" alt="Toyta RAV4">
+        <p>Brand: Toyota</p>
+        <p>Model: Toyota RV4 XL(2025) </p>
+        <p class="category">Category: SUV Crossover</p>
+        <p>Price: 50$/day</p>
+        <p>Engine: 2.5L 4-cylinder
+           Power: 203 hp
+          Transmission: 8-speed automatic
+          Drive: FWD or AWD</p>
+          <a class="btn" href="#" onclick="selectcar('Toyota RV4', 50);return false;">Book Now</a>
+      </div>
+      <div class ="car-card" data-brand="Audi" data-category="SUV Crossover">
+        <img src="Images/2019-audi-q3.jpg" alt ="Audi Q3">
+        <P>Brand : Audi</P>
+        <p>Model : Audi Q3 (2019)</p>
+        <p class="category">Category: SUV Crossover</p>
+        <P>Price: 70$/day</P>
+        <p>Engine:
+           2.0L turbocharged 4-cylinder
+          Power: 228 hp
+          Torque: 258 lb-ft
+          Transmission: 8-speed automatic
+          Drive: Quattro AWD (standard)</p>
+          <a class="btn" href="#" onclick="selectcar('Audi Q3', 70);return false;">Book Now</a>
+    </div>
+    <div class="car-card" data-brand="Mercedes-Benz" data-category="SUV">
+      <img src="Images/14395_st0640_116.webp" alt="Mercedes-Benz">
+      <p>Brand: Mercedes-Benz</p>
+      <p>Model : Mercedes-Benz 63 (2020)</p>
+      <p class="category">Category: SUV</p>
+      <P>Price : 300$/day</P>
+      <P>Engine: 4.0L twin-turbo V8
+        Power:577 hp</P>
+        <a class="btn" href="#" onclick="selectcar('Mercedes-Benz G63', 300);return false;">Book Now</a>
+    </div>
+    <div class ="car-card" data-brand="Volkswagen" data-category="SUV Crossover">
+      <img src="Images/2017-Volkswagen-Tiguan-162TSI-279776.webp" alt="Volkswagen">
+      <p>Brand: Volkswagen</p>
+      <P>Model : Volkswagen Tiguan (2019)</P>
+      <p class="category">Category: SUV Crossover</p>
+      <P>Price: 70$/day</P>
+      <P>Engine: 2.0L turbocharged 4-cylinder
+        Power: 184 hp
+        Torque: 221 lb-ft
+        Transmission: 8-speed automatic
+        Drive: FWD or AWD (4Motion)</P>
+        <a class="btn" href="#" onclick="selectcar('Volkswagen Tiguan', 70);return false;">Book Now</a>
+      </div>
+      <div class = "car-card" data-brand="Ferrari" data-category="Super Cars">
+        <img src = "Images/2022-ferrari-812-competizione-main.jpg" alt="Ferrari">
+        <p>Brand : Ferrari</p>
+        <P>Model : Ferrari competizione (2022)</P>
+        <p class="category">Category: Super Cars</p>
+        <P>Price : 700$/day</P>
+        <P>Engine: 6.5L V12 (naturally aspirated)
+          Power: ~830 hp
+          Redline: 9,500 rpm
+          0–100 km/h: ~2.85 sec
+          Top speed: ~340 km/h</P>
+          <a class="btn" href="#" onclick="selectcar('Ferrari Competizione', 700); return false;">Book Now</a>
+      </div>
+      <div class = "car-card" data-brand="Mini Cooper" data-category="Hatchback">
+        <img src ="Images/9fc1af2507b099b00c54d2cc17e5c5c3.webp" alt="Mini Cooper">
+        <p>Brand : Mini Cooper</p>
+        <p>Model : Mini Cooper</p>
+        <p class="category">Category : Hatchback</p>
+        <p>Price: 80$/day</p>
+        <p>Engine: 1.5L turbo engine
+          2.0L turbo engine in Cooper S
+          Electric Cooper SE version</p>
+          <a class ="btn" href="#" onclick="selectcar('Mini Cooper' , 80); return false;">Book Now</a> 
+      </div>
+      <div class = "car-card" data-brand="Volkswagen" data-category="Hatchback">
+        <img src="Images/WH12990-4201-00-front-800x600.jpg" alt="Volkswagen Golf">
+        <p>Brand : Volkswagen</p>
+        <p>Model : Golf</p>
+        <p class ="category">Category : Hatchback</p>
+        <p>Price : 65$/day</p>
+        <p>Engine :Golf R → high-performance AWD hatchback
+          The latest Golf R comes with:
+          2.0L turbo engine
+          328 horsepower
+          All-wheel drive
+          Adaptive cruise control
+          Navigation system</p>
+          <a class ="btn" href="#" onclick="selectcar('Volkswagen Golf' , 65); return false;">Book Now</a>
+      </div>
+      <div class = "car-card" data-brand="Cadillac CT5-V Blackwing" data-category="Performance Sedan">
+        <img src="Images/IMG_9933-2-scaled.webp" alt="Cadillac CT5-V Blackwing">
+        <p>Brand : Cadillac</P>
+        <P>Model :CT5 -V </P>
+        <p class="category">Category: Performance Sedan</p>
+        <p>Price : 170$/day</P>
+          <p>Engine:
+            It comes with a:
+            6.2L supercharged V8 engine
+            668 horsepower
+            659 lb-ft torque
+            Rear-wheel drive (RWD)
+            It can accelerate:
+            0–60 mph in about 3.4 seconds
+            Top speed over 200 mph</p>
+          <a class ="btn" href="#" onclick="selectcar('Cadillac CT5-V' , 170); return false;">Book Now</a>
+          </div>
+      <div class =  "car-card" data-brand="Porsche Panamera" data-category="Performance Sedan">
+        <img src="Images/2020_porsche_panamera-pic-5414288596615523469-1024x768.jpeg" alt="Porsche Panamera">
+        <p>Brand : Porsche</p>
+        <p>Model : Panamera</P>
+        <p class="category">Category: Performance Sedan</p> 
+        <p>Price : 375$/day</p>
+        <p>Engine:
+          The standard Panamera comes with:
+          2.9L twin-turbo V6 engine
+          348 horsepower
+          368 lb-ft torque
+          8-speed PDK automatic transmission
+          Rear-wheel drive (AWD optional)
+          Performance:
+          0–60 mph in about 5.0 seconds
+          Top speed around 169 mph</p>
+          <a class ="btn" href="#" onclick="selectcar('Porsche Panamera' , 375); return false;">Book Now</a> 
+        </div>
+      <div class =  "car-card" data-brand="Audi" data-category="Sedan">
+        <img src="Images/2019-audi-a6.jpg" alt="Audi A6">
+        <p>Brand : Audi </p>
+        <p>Model : A6 </p>
+        <p class="category">Category: Sedan</p>
+        <p>Price : 90$/day</p>
+        <p>Engine:2.0L Turbocharged Inline-4
+            Around 261 horsepower
+            Good fuel economy
+            Smooth daily driving
+            3.0L Turbocharged V6 Mild Hybrid
+            Around 335 horsepower
+            0–60 mph in about 5.1 seconds</p>
+          <a class="btn" href="#" onclick="selectcar('Audi A6' , 90); return false;">Book Now</a>
+      </div> 
+      <div class ="car-card" data-brand="Tesla Model Y" data-category="SUV Crossover">
+        <img src="Images/Tesla model Y-16.webp" alt="Tesla Model Y">
+        <p>Brand : Tesla</p>
+        <p>Model : Model Y</p>
+        <p class="category">Category: SUV Crossover</p>
+        <p>Price : 150$/day</p>
+        <p>Engine: It comes with:
+          Single electric motor (RWD)
+          or
+          Dual electric motors (AWD)
+          The stronger Long Range Dual Motor version produces around:
+          ~500 horsepower
+          Extremely fast acceleration
+          Instant electric torque
+          Performance
+          For the AWD version:
+          0-100 km/h≈4.7 seconds
+          Battery & Range
+          Up to around 600 km range (WLTP) depending on version
+          Tesla Supercharger fast charging support</p>
+          <a class="btn" href="#" onclick="selectcar('Tesla Model Y' , 150); return false;">Book Now</a>
+      </div>
+      <div class ="car-card" data-brand="Kia" data-category="SUV Crossover">
+        <img src="Images/2024-kia-sportage.jpg" alt="Kia Sportage">
+        <p>Brand :Kia</p>
+        <p>Model :Sportage</p>
+        <p class ="category">Category : SUV Crossover</p>
+        <p>Price : 55$/day</p>
+        <p>Engine:
+          Standard gasoline version:
+          2.5L Inline 4-cylinder
+          187 horsepower
+          178 lb-ft torque
+          8-speed automatic transmission
+          For the engine setup:
+          2.5L Inline 4 → 187 hp</p>
+        <a class="btn" href="#" onclick="selectcar('Kia Sportage' , 55); return false;">Book Now</a>
+      </div>
+      <div class ="car-card" data-brand="Honda CRV" data-category="SUV Crossover">
+        <img src="Images/161476_2019_CR-V_hybrid.jpg" alt="Honda CRV">
+        <p>Brand : Honda</p>
+        <p>Model : CRV</p>
+        <p class ="category">Category : SUV Crossover</p>
+        <p>Price : 40$/day</p>
+        <p>Engine Two option avaliable:
+        Gasoline version:
+        1.5L Turbocharged Inline-4
+        190 horsepower
+        179 lb-ft torque
+        Hybrid version:
+        2.0L Hybrid engine
+        Better fuel economy
+        Smoother city driving
+        For the turbo engine:
+        1.5L Turbocharged Inline 4 → 190 hp</p>
+        <a class="btn" href="#" onclick="selectcar('Honda CRV' , 40); return false;">Book Now</a>
+      </div>
+     <div class= "car-card" data-brand="Rolls Royce" data-category="SUV">
+      <img src="Images/rolls_royce_cullinan_black_badge_2024_5k-2560x1440.jpg" alt="Rolls Royce Cullinan">
+      <p>Brand : Rolls Royce</p>
+      <p>Model : Cullinan</p>
+      <p class ="category">Category : SUV</p>
+      <p>Price :800$/day</p>
+      <p>Engine:
+        6.75L Twin-Turbocharged V12
+        12 cylinders
+        Petrol engine
+        8-speed automatic transmission
+        All-Wheel Drive (AWD)</p>
+      <a class="btn" href="#" onclick="selectcar('Rolls Royce Cullinan' , 800); return false;">Book Now</a>
+     </div>
+      <div class= "car-card" data-brand="Lamborghini" data-category="Super Cars">
+        <img src="Images/thumb-1920-717071.jpg" alt="Lamborghini Huracan">
+        <p>Brand: Lamborghini</p>
+        <p>Model : Huracan</p>
+        <p class ="category">Category : Super Cars</p>
+        <p>Price : 500$/day</p>
+        <p>Engine:
+          5.2L Naturally Aspirated V10
+          Mid-engine layout
+          No turbochargers
+          7-speed dual-clutch automatic transmission
+          Available in RWD or AWD depending on model</p>
+          <a class="btn" href="#" onclick="selectcar('Lamborghini Huracan' , 500); return false;">Book Now</a>
+      </div>
+
+  </main>
+
+  <script>
+    
+    const searchInput = document.getElementById("searchInput");//get the input from user//
+    const filterBrand = document.getElementById("filterBrand");//makeing fiter based on input//
+    const filterCategory = document.getElementById("filterCategory");
+    const carsGrid = document.querySelector(".cars-grid");
+    const cars = Array.from(document.querySelectorAll(".car-card"));//introduce the cars based on filter and input of the user//
+
+    function getCarName(car){
+      return car.querySelector("img").alt.toLowerCase();
+    }
+
+    function sortCarsAlphabetically(){
+      cars
+        .sort((firstCar, secondCar) => getCarName(firstCar).localeCompare(getCarName(secondCar)))
+        .forEach(car => carsGrid.appendChild(car));
+    }
+
+    sortCarsAlphabetically();
+    //function filter//
+    function filterCars(){
+      const searchValue = searchInput.value.toLowerCase();//change input to lowercase//
+      const selectedBrand = filterBrand.value;
+      const selectedCategory = filterCategory.value;
+      sortCarsAlphabetically();
+      cars.forEach(car=> {
+        const text = car.textContent.toLowerCase();//show all information about the car after search and filter//
+        const brand = car.getAttribute("data-brand");
+        const category = car.getAttribute("data-category");
+        const matchesSearch = text.includes(searchValue);
+        const matchesFilter = selectedBrand === "all" || brand === selectedBrand;
+        const matchesCategory = selectedCategory === "all" || category === selectedCategory;
+        if(matchesSearch && matchesFilter && matchesCategory){
+          car.style.display = "block";
+        } else {
+          car.style.display = "none";
+        }
+      });
+    }
+    searchInput.addEventListener("keyup", filterCars);
+    filterBrand.addEventListener("change", filterCars);
+    filterCategory.addEventListener("change", filterCars);
+    document.getElementById("filterButton").addEventListener("click", filterCars);
+    
+ </script>
+ <script>
+  
+  function selectcar(car, price){
+    const selectedData = { name: car, price: price };
+    localStorage.setItem("selectedcar", JSON.stringify(selectedData));
+    alert("Are you sure you want to book this car ? : " + car);
+    window.location.href="contract.html";
+  }
+    
+ </script>
+</body>
+</html>

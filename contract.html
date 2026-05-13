@@ -1,0 +1,233 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contract</title>
+    <link rel="stylesheet" href="car.css">
+</head>
+<body>
+      <div style ="text-align: center; font-weight: bold; font-size: 20px; color : white">
+        JARRAH Rental
+        Contract
+        </div>
+    <form onsubmit="generatecontract(event); return false;">
+        <label> User (Full Name):</label>
+        <input type="text" id="name" placeholder="Full name">
+        <label>Car Model:</label>
+        <input type="text" id="car" placeholder="Car model">
+        <label>Pick-up Date:</label>
+        <input type="date" id="pickup">
+        <label>Return Date:</label>
+        <input type="date" id="returndate">
+        <label>Actual Return Date:</label>
+        <input type="date" id="actualReturn" placeholder="Actual return date">
+        <label>Number of Days:</label>
+        <input type="number" id="days" placeholder="Number of days" readonly>
+        <button type="submit">Generate contract</button>
+        <p id="result" style="color: #d1002f; font-weight: bold; margin-top: 1rem;"></p>
+    </form>
+    <div id="contractOutput" style="text-align: center;"></div>
+    <button type="button" class="print" onclick="window.print()">Print Contract</button>
+     <footer><p> Copyright&copy;JARRAH RENTAL CARS 2026</p></footer>
+ <script> /*JS CODE*/
+    function generatecontract(event){
+        event.preventDefault();
+        const result = document.getElementById("result");
+        let name = document.getElementById("name").value.trim();
+        let car = document.getElementById("car").value.trim();
+        let pickup = document.getElementById("pickup").value;
+        let returndate = document.getElementById("returndate").value;
+        let actualReturn = document.getElementById("actualReturn").value;
+        let scheduledDays = parseInt(document.getElementById("days").value, 10);
+
+        const stored = localStorage.getItem("selectedcar");
+        let selectedCar = null;
+        try {
+            selectedCar = stored ? JSON.parse(stored) : null;
+        } catch (e) {
+            selectedCar = null;
+        }
+        const pricePerDay = selectedCar?.price ?? 0;
+
+        if (!name || !car || !pickup || !returndate || !scheduledDays) {
+            result.textContent = "PLEASE FILL THE CONTRACT !!!";
+            return;
+        }
+
+        let refundAmount = 0;
+        let lateDays = 0;
+        let extraRentalAmount = 0;
+        let lateFeeAmount = 0;
+        let lateFeePerDay = 0;
+        let lateChargeAmount = 0;
+        let lateFeeBreakdown = "";
+        let actualDaysText = "Not provided";
+        let refundText = "No refund.";
+        let lateText = "No late fee.";
+
+        if (actualReturn) {
+            const start = new Date(pickup);
+            const actual = new Date(actualReturn);
+            const millisecondsPerDay = 1000 * 60 * 60 * 24;
+            const actualDays = Math.round((actual - start) / millisecondsPerDay);
+
+            if (actual < start) {
+                result.textContent = "Actual return date cannot be before pickup date.";
+                return;
+            }
+
+            actualDaysText = actualDays > 0 ? actualDays : 0;
+            if (actualDays < scheduledDays) {
+                const refundDays = scheduledDays - actualDaysText;
+                refundAmount = refundDays * pricePerDay;
+                refundText = `Refund due for ${refundDays} unused day(s): $${refundAmount}`;
+            } else if (actualDays > scheduledDays) {
+                lateDays = actualDays - scheduledDays;
+                extraRentalAmount = lateDays * pricePerDay;
+                lateFeePerDay = pricePerDay * 0.10;
+                lateFeeAmount = lateDays * lateFeePerDay;
+                lateChargeAmount = extraRentalAmount + lateFeeAmount;
+                const scheduledReturnDate = new Date(returndate);
+                let lateRows = "";
+
+                for (let day = 1; day <= lateDays; day++) {
+                    const lateDate = new Date(scheduledReturnDate);
+                    lateDate.setDate(scheduledReturnDate.getDate() + day);
+                    const delayedDayTotal = pricePerDay + lateFeePerDay;
+                    lateRows += `<li>Delay day ${day} (${lateDate.toISOString().split("T")[0]}): $${pricePerDay.toFixed(2)} extra rental + $${lateFeePerDay.toFixed(2)} late fee = $${delayedDayTotal.toFixed(2)}</li>`;
+                }
+
+                lateFeeBreakdown = `
+                    <p><strong>Extra Rental Per Delayed Day:</strong> $${pricePerDay.toFixed(2)}</p>
+                    <p><strong>Late Fee Per Delayed Day:</strong> 10% of $${pricePerDay} = $${lateFeePerDay.toFixed(2)}</p>
+                    <ul>${lateRows}</ul>
+                `;
+                lateText = `Late return charge for ${lateDays} extra day(s): $${extraRentalAmount.toFixed(2)} extra rental + $${lateFeeAmount.toFixed(2)} late fee = $${lateChargeAmount.toFixed(2)}`;
+            }
+        }
+
+        const totalCost = pricePerDay * scheduledDays;
+        const totalPaidAfterRefund = totalCost - refundAmount;
+        const totalDueAfterLateFees = totalCost + lateChargeAmount;
+        result.textContent = "";
+        let contract = `
+        <div style="border: 2px solid #333; padding: 15px; margin-top: 20px; text-align: left;">
+            <h3>Rental Agreements</h3>
+            <p><strong>This agreement is made between </strong><b>${name}</b><strong> and JARRAH RENTAL.</strong></p>
+            <p><strong>The customer agrees to rent the Car:</strong> <b>${car}</b>.</p>
+            <p><strong>Pick-up Date:</strong> ${pickup}</p>
+            <p><strong>Scheduled Return Date:</strong> ${returndate}</p>
+            <p><strong>Actual Return Date:</strong> ${actualReturn || "Not provided"}</p>
+            <p><strong>Scheduled Number of Days:</strong> ${scheduledDays}</p>
+            <p><strong>Actual Number of Days:</strong> ${actualReturn ? actualDaysText : "Not provided"}</p>
+            <p><strong>Price per Day:</strong> $${pricePerDay}</p>
+            <p><strong>Amount Paid at Booking:</strong> $${totalCost}</p>
+            <p><strong>Refund:</strong> $${refundAmount}</p>
+            <p><strong>Late Days:</strong> ${lateDays}</p>
+            <p><strong>Extra Rental Charge:</strong> $${extraRentalAmount.toFixed(2)}</p>
+            <p><strong>Late Fee:</strong> $${lateFeeAmount.toFixed(2)}</p>
+            <p><strong>Total Late Charge:</strong> $${lateChargeAmount.toFixed(2)}</p>
+            ${lateFeeBreakdown}
+            <p><strong>Total Paid After Refund:</strong> $${totalPaidAfterRefund}</p>
+            <p><strong>Total Due After Late Fees:</strong> $${totalDueAfterLateFees.toFixed(2)}</p>
+            <p><em>${refundText}</em></p>
+            <p><em>${lateText}</em></p>
+            <p><strong>Signature:</strong> ________________________</p>
+        </div>`;
+        document.getElementById("contractOutput").innerHTML = contract;
+        alert('Thank you! Your contract has been successfully generated.');
+    }
+ </script>
+ <script>
+    
+    window.onload = function() {
+        const stored = localStorage.getItem("selectedcar");
+        if (stored) {
+            try {
+                const selectedCar = JSON.parse(stored);
+                if (selectedCar && selectedCar.name) {
+                    document.getElementById("car").value = selectedCar.name;
+                }
+            } catch (e) {
+                document.getElementById("car").value = stored;
+            }
+        }
+
+        const pickupEl = document.getElementById("pickup");
+        const returnEl = document.getElementById("returndate");
+        const actualReturnEl = document.getElementById("actualReturn");
+        if (pickupEl) pickupEl.addEventListener("change", updateDays);
+        if (returnEl) returnEl.addEventListener("change", updateDays);
+        if (actualReturnEl) actualReturnEl.addEventListener("change", updateDays);
+    }
+
+    function updateDays() {
+        const pickup = document.getElementById("pickup").value;
+        const returndate = document.getElementById("returndate").value;
+        const actualReturn = document.getElementById("actualReturn").value;
+        const daysInput = document.getElementById("days");
+
+        if (!pickup || !returndate) {
+            daysInput.value = "";
+            return;
+        }
+
+        const start = new Date(pickup);
+        const end = new Date(returndate);
+        const millisecondsPerDay = 1000 * 60 * 60 * 24;
+        const diffDays = Math.round((end - start) / millisecondsPerDay);
+        daysInput.value = diffDays > 0 ? diffDays : "";
+
+        if (actualReturn) {
+            const actual = new Date(actualReturn);
+            if (actual < start) {
+                document.getElementById("result").textContent = "Actual return date cannot be before pickup date.";
+            } else {
+                document.getElementById("result").textContent = "";
+            }
+        }
+    }
+ </script>
+   
+ <script>
+    
+    function calculatePrice(){
+        let car= localStorage.getItem("selectedcar");
+        let days=document.getElementById("days").value;
+        let priceperday;
+        if(car === "Mercedes E63"){
+            priceperday =100;
+        }
+        else if(car === "BMW M5"){
+            priceoerday=200;
+        }
+        else if(car === "Kia Picanto"){
+            priceperday=20;
+        }
+        else if(car=== "Toyota Corolla"){
+            priceperday=30;
+        }
+        else if (car==="Nissan"){
+            priceperday=0;
+        }
+        else if(car==="Toyota RV4"){
+            priceperday=50;
+        }
+        else if (car==="Audi"){
+            priceperday=70;
+        }
+        else if (car=== "Mercedes G63"){
+            priceperday=300;
+        }
+        else if(car=== "Volkswagen"){
+            priceperday=70;
+        }
+        else if(car === "Ferrari"){
+            priceperday=700;
+        }
+        let total=days*priceperday;
+        documnet.getElementById("totalprice").innerHtml = "Total price: $" + total;
+    }
+ </script>    
+</body>
+</html>
