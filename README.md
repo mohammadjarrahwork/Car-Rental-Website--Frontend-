@@ -26,4 +26,12 @@ A responsive ReactJS frontend application for a car rental service. The project 
 
 ## Screenshots
 
-Include screenshots of the Home page, Cars page, and Contact page after launching the app.
+### Home Page
+![Home Page](<Screenshot (81).png>)
+
+### Cars Page
+![Cars Page](<Screenshot (82).png>)
+
+### Contract Page
+![Contract Page](<Screenshot (83).png>)
+
