@@ -16,7 +16,7 @@ A responsive ReactJS frontend application for a car rental service. The project 
 2. Open `frontend/index.html` directly in the browser.
 3. Use the navigation menu to move between pages.
 
-> If you want to publish to GitHub Pages, deploy the `frontend` folder as a static site.
+
 
 ## Files
 
